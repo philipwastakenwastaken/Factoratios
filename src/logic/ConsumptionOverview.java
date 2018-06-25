@@ -13,9 +13,9 @@ public class ConsumptionOverview extends MaterialOverview {
         this.numOfBelts = numOfBelts;
     }
 
-
-    public double totalConsumption() {
-       return 0;
+    // returns
+    public double totalConsumption(int strongInputIndex, int strongOutputIndex) {
+        return 0;
     }
 
 }

@@ -13,7 +13,6 @@ public class Building {
       this.productionArray = new double[recipe.getOutputList().size()];
       calcConsumption();
       calcProduction();
-
    }
 
    private void calcConsumption(){
@@ -26,6 +25,29 @@ public class Building {
         for (int i = 0; i < recipe.getInputList().size(); i++) {
             productionArray[i] = craftingSpeed * recipe.getOutputList().get(i) / recipe.getRecipeTime();
         }
+    }
+
+    // strongest input and output are the constraining factors in your setup
+    public int getStrongestInputIndex() {
+       return indexHelper(consumptionArray);
+    }
+
+    public int getStrongOutputIndex() {
+       return indexHelper(consumptionArray);
+    }
+
+    private int indexHelper(double[] materialArray) {
+        int index = 0;
+        double max = 0;
+        for (int i = 0; i < materialArray.length; i++) {
+            if (materialArray[i] > max) {
+                max = materialArray[i];
+                index = i;
+            }
+
+        }
+        return index;
+
     }
 
    // getters and setters from this point on

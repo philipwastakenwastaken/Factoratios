@@ -12,7 +12,7 @@ public abstract class MaterialOverview {
         this.numOfBelts = numOfBelts;
     }
 
-    public double buildingsForTotalBeltConsumption(int strongInputIndex) {
+    public double buildingsForOneBeltConsumption(int strongInputIndex) {
         return beltSpeed / building.getConsumptionArray()[strongInputIndex];
     }
 

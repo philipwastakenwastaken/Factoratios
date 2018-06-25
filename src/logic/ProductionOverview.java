@@ -6,6 +6,7 @@ public class ProductionOverview extends MaterialOverview {
 
     private Building building;
     private double beltSpeed;
+    // number of INPUT belts
     private int numOfBelts;
 
     public ProductionOverview(Building building, double beltSpeed, int numOfBelts) {
@@ -15,10 +16,12 @@ public class ProductionOverview extends MaterialOverview {
         this.numOfBelts = numOfBelts;
     }
 
-    // returns the total output of an desired material (input is one belt)
+    // returns the total output of an desired material given the number of belts
     public double totalProduction(int strongInputIndex, int strongOutputIndex) {
-        return buildingsForTotalBeltConsumption(strongInputIndex) * building.getProductionArray()[strongOutputIndex];
+        return buildingsForOneBeltConsumption(strongInputIndex) * building.getProductionArray()[strongOutputIndex]
+                * numOfBelts;
     }
+
     // returns how many belts the output amounts to
     public double totalProductionInBelts(int strongInputIndex, int strongOutputIndex) {
         return totalProduction(strongInputIndex, strongOutputIndex) / beltSpeed;
@@ -28,7 +31,7 @@ public class ProductionOverview extends MaterialOverview {
     public double[] totalProductionArray(int strongInputIndex) {
         ArrayList<Double> totalProductionArray = new ArrayList<>();
         for (double tempProduction : building.getProductionArray()) {
-            totalProductionArray.add(buildingsForTotalBeltConsumption(strongInputIndex) * tempProduction);
+            totalProductionArray.add(buildingsForOneBeltConsumption(strongInputIndex) * tempProduction);
         }
         return totalProductionArray.stream().mapToDouble(Double::doubleValue).toArray();
     }
